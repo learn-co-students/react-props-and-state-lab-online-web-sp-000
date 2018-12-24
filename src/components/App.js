@@ -16,22 +16,25 @@ class App extends React.Component {
   }
 
   // This callback needs to update<App /> 's state.filters.type
-  onChangeType = newType => {
-    this.setState({
-      filters: {
-        ...this.state.filters,
-        type: newType
-      }
-    });
+  onChangeType = ({ target: { value } }) => {
+    this.setState({ filters: { ...this.state.filters, type: value } });
   };
 
   onFindPetsClick = () => {
-    this.state.filters.type === "all"
-      ? (URL = "/api/pets")
-      : (URL = `/api/pets/?type=${this.state.filter.type}`);
+    let URL = "/api/pets";
+    if (this.state.filters.type !== "all") {
+      URL += `?type=${this.state.filters.type}`;
+    }
     fetch(URL)
       .then(resp => resp.json())
       .then(pets => this.setState({ pets }));
+  };
+
+  onAdoptPet = id => {
+    const updatedPets = this.state.pets.map(pet =>
+      pet.id === id ? { ...pet, isAdopted: true } : pet
+    );
+    this.setState({ pets: updatedPets });
   };
 
   render() {

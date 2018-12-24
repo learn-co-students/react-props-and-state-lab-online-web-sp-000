@@ -3,8 +3,7 @@ import React from "react";
 class Pet extends React.Component {
   render() {
     const {
-      pet: { name, type, age, weight, gender, id },
-      isAdopted,
+      pet: { name, type, age, weight, gender, id, isAdopted },
       onAdoptPet
     } = this.props;
     return (
@@ -23,10 +22,13 @@ class Pet extends React.Component {
           </div>
         </div>
         <div className="extra content">
-          {{ isAdopted } ? (
+          {isAdopted ? (
             <button className="ui disabled button">Already adopted</button>
           ) : (
-            <button className="ui primary button" onClick={onAdoptPet}>
+            <button
+              className="ui primary button"
+              onClick={() => onAdoptPet(id)}
+            >
               Adopt pet
             </button>
           )}
