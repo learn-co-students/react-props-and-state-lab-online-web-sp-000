@@ -16,12 +16,24 @@ class App extends React.Component {
   }
 
   changeTypeCallback(updatedType) {
-    this.setState({ filters: { ...this.state.filters, type: updatedType } }, () => {
-      console.log(this.state.filters.type);
-    });
+    this.setState({ filters: { ...this.state.filters, type: updatedType } });
   }
 
-  findPets() {}
+  findPets() {
+    let queryString =
+      this.state.filters.type === "all"
+        ? ""
+        : `?type=${this.state.filters.type}`;
+    let here = this;
+    fetch(`/api/pets${queryString}`)
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        console.log(json.length + " pets returned");
+        here.setState({ pets: json });
+      });
+  }
 
   render() {
     return (
@@ -34,7 +46,7 @@ class App extends React.Component {
             <div className="four wide column">
               <Filters
                 onChangeType={this.changeTypeCallback.bind(this)}
-                onPetsClick={this.findPets.bind(this)}
+                onFindPetsClick={this.findPets.bind(this)}
               />
             </div>
             <div className="twelve wide column">
