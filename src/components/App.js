@@ -20,18 +20,18 @@ class App extends React.Component {
   }
 
   findPets() {
-    let queryString =
+    const queryString =
       this.state.filters.type === "all"
         ? ""
         : `?type=${this.state.filters.type}`;
-    let here = this;
+    const here = this;
     fetch(`/api/pets${queryString}`)
       .then(res => res.json())
       .then(json => here.setState({ pets: json }));
   }
 
   adoptPet(pet) {
-    
+
   }
 
   render() {
