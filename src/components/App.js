@@ -30,8 +30,9 @@ class App extends React.Component {
       .then(json => here.setState({ pets: json }));
   }
 
-  adoptPet(pet) {
-
+  adoptPet(id) {
+    console.log(id);
+    
   }
 
   render() {
