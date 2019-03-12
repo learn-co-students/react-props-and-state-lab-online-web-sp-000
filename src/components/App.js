@@ -31,8 +31,10 @@ class App extends React.Component {
   }
 
   adoptPet(id) {
-    console.log(id);
-    
+    let pets = [...this.state.pets]
+    let pet = pets.find(p => p.id === id);
+    pet.isAdopted = true
+    this.setState({ pets: pets });
   }
 
   render() {
@@ -50,7 +52,10 @@ class App extends React.Component {
               />
             </div>
             <div className="twelve wide column">
-              <PetBrowser pets={this.state.pets} onAdoptPet={this.adoptPet.bind(this)}/>
+              <PetBrowser
+                pets={this.state.pets}
+                onAdoptPet={this.adoptPet.bind(this)}
+              />
             </div>
           </div>
         </div>
