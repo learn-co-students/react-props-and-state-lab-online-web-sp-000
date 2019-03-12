@@ -1,20 +1,21 @@
-import React from 'react'
+import React from "react";
 
 class Pet extends React.Component {
   render() {
+    const pet = this.props.pet;
     return (
       <div className="card">
         <div className="content">
           <a className="header">
-            {/*'♀' OR '♂' */}
-            PET NAME
+            {pet.gender === "female" ? "♀" : "♂"}
+            {pet.name}
           </a>
           <div className="meta">
-            <span className="date">PET TYPE</span>
+            <span className="date">{pet.type}</span>
           </div>
           <div className="description">
-            <p>Age: PET AGE</p>
-            <p>Weight: PET WEIGHT</p>
+            <p>Age: {pet.age}</p>
+            <p>Weight: {pet.weight}</p>
           </div>
         </div>
         <div className="extra content">
@@ -22,8 +23,8 @@ class Pet extends React.Component {
           <button className="ui primary button">Adopt pet</button>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Pet
+export default Pet;
