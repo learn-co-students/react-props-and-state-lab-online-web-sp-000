@@ -15,7 +15,7 @@ class App extends React.Component {
     };
   }
 
-  changeTypeCallback(updatedType) {
+  filterPets(updatedType) {
     this.setState({ filters: { ...this.state.filters, type: updatedType } });
   }
 
@@ -26,13 +26,12 @@ class App extends React.Component {
         : `?type=${this.state.filters.type}`;
     let here = this;
     fetch(`/api/pets${queryString}`)
-      .then(res => {
-        return res.json();
-      })
-      .then(json => {
-        console.log(json.length + " pets returned");
-        here.setState({ pets: json });
-      });
+      .then(res => res.json())
+      .then(json => here.setState({ pets: json }));
+  }
+
+  adoptPet(pet) {
+    
   }
 
   render() {
@@ -45,12 +44,12 @@ class App extends React.Component {
           <div className="ui grid">
             <div className="four wide column">
               <Filters
-                onChangeType={this.changeTypeCallback.bind(this)}
+                onChangeType={this.filterPets.bind(this)}
                 onFindPetsClick={this.findPets.bind(this)}
               />
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser pets={this.state.pets} onAdoptPet={this.adoptPet.bind(this)}/>
             </div>
           </div>
         </div>
