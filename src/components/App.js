@@ -37,9 +37,23 @@ onFindPetsClick = () => {
   .then(petBlob => {
     this.setState({
       pets: petBlob
-    }, () => console.log(this.state.pets))
+    }, () => (this.state.pets))
     
   });
+
+}
+
+onAdoptPet = (id) => {
+  //assign object with spread operator
+  let petsArray = [...this.state.pets]
+  let pet = petsArray.find(p => p.id === id ? id : ''  )
+ 
+  //change pet status on click
+  pet.isAdopted = true
+
+  this.setState({
+    pets: petsArray
+  })
 
 }
 
@@ -54,12 +68,12 @@ onFindPetsClick = () => {
           <div className="ui grid">
             <div className="four wide column">
               <Filters onChangeType={this.onChangeType} 
-              onFindPetsClick={this.onFindPetsClick}
-              />
-
+              onFindPetsClick={this.onFindPetsClick}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser pets={this.state.pets} />
+              <PetBrowser
+              onAdoptPet={this.onAdoptPet} 
+              pets={this.state.pets} />
             </div>
           </div>
         </div>
