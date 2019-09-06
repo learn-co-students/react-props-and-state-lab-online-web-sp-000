@@ -26,7 +26,7 @@ onChangeType = event => {
 }
 
 onFindPetsClick = () => {
-  let url = "/api/pets"
+  let url = '/api/pets'
 
   if(this.state.filters.type !== 'all'){
     url += `?type=${this.state.filters.type}`
@@ -37,7 +37,7 @@ onFindPetsClick = () => {
   .then(petBlob => {
     this.setState({
       pets: petBlob
-    }, () => console.log(this.state))
+    }, () => console.log(this.state.pets))
     
   });
 
@@ -59,7 +59,7 @@ onFindPetsClick = () => {
 
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser pets={this.state.pets} />
             </div>
           </div>
         </div>
