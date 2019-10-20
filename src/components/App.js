@@ -10,6 +10,7 @@ class App extends React.Component {
 // filtering of the pets
     this.state = {
       pets: [],
+      adoptedPets: [],
       filters: {
         type: 'all'
       }
@@ -36,11 +37,17 @@ class App extends React.Component {
 
   onAdoptPet = (petId) => {
     // how to use the ID and keep the previous state
-    console.log(petId)
-    const pets = this.state.pets.map(p => {
-      return p.id === petId ? { ...p, isAdopted: true } : p;
+    this.setState({ adoptedPets: [...this.state.adoptedPets, petId] });
+
+    let pets = this.state.pets.map(p => {
+      if (p.id === petId) {
+        return { ...p, isAdopted: true }
+      } else {
+        return p
+      }
     });
     this.setState({ pets });
+    // need to figure out how to permanently update
   }
 
   render() {
@@ -55,7 +62,7 @@ class App extends React.Component {
               <Filters onChangeType={this.changeType} onFindPetsClick={this.onFindPetsClick} />
             </div>
             <div className="twelve wide column">
-              <PetBrowser pets={this.state.pets} onAdoptPet={this.onAdoptPet} />
+              <PetBrowser pets={this.state.pets} onAdoptPet={this.onAdoptPet} adoptedPets={this.state.adoptedPets} />
             </div>
           </div>
         </div>

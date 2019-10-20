@@ -4,13 +4,11 @@ import React from 'react'
 // needs to display right data
 
 class Pet extends React.Component {
-  isAdoptedButton = () => {
-    if (!!this.props.isAdopted) {
-      return <button className="ui disabled button">Already adopted</button>
-    } else {
-      return <button className="ui primary button" onClick={() => this.props.onAdoptPet(this.props.pet.id)} >Adopt pet</button>
-    }
-  }
+  // isAdoptedButton = () => {
+  //
+  // }
+  // On click, it runs a function where this ID is passed.
+  // Don't just write this.props.onAdoptPet(this.props.pet.id) otherwise onClick ...
 
   render() {
     return (
@@ -29,7 +27,9 @@ class Pet extends React.Component {
           </div>
         </div>
         <div className="extra content">
-          {this.isAdoptedButton()}
+          <button className={!this.props.isAdopted ? "ui primary button" :"ui disabled button" }
+            onClick={!this.props.isAdopted ? (() => this.props.onAdoptPet(this.props.pet.id)) : null } >
+            {!this.props.isAdopted ? "Adopt pet" : "Already adopted"}</button>
         </div>
       </div>
     )
