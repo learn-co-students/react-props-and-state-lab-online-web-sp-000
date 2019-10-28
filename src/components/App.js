@@ -29,6 +29,7 @@ class App extends React.Component {
       fetch('/api/pets')
         .then(resp => resp.json())
         .then(json => {
+          console.log(json);
           for (let i = 0; i < json.length; i++){
             this.state.pets.push(json[i]);
           }
@@ -44,6 +45,15 @@ class App extends React.Component {
     }
   }
 
+  adoptPet = (id) => {
+    for(let i = 0; i < this.state.pets.length; i++){
+      if (this.state.pets[i].id === id){
+        this.state.pets[i].isAdopted = true;
+        break;
+      }
+    }
+  }
+
   render() {
     return (
       <div className="ui container">
@@ -56,7 +66,7 @@ class App extends React.Component {
               <Filters onChangeType={this.changeType} onFindPetsClick={this.findPetsClick} />
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser pets={this.state.pets} onAdoptPet={this.adoptPet}/>
             </div>
           </div>
         </div>
