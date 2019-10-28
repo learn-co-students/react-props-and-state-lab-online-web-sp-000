@@ -11,14 +11,16 @@ import PetBrowser from '../src/components/PetBrowser';
 Enzyme.configure({ adapter: new Adapter() });
 
 const FILTERS_STATE = {
-  type: 'all'
+  type: 'all',
 };
 
 describe('<App />', () => {
   describe('Filters', () => {
     it('should change filter type', () => {
       const spy = sinon.spy();
-      const wrapper = shallow(<Filters onChangeType={spy} filters={FILTERS_STATE} />);
+      const wrapper = shallow(
+        <Filters onChangeType={spy} filters={FILTERS_STATE} />,
+      );
       wrapper.find('select').simulate('change', { target: { value: 'dog' } });
     });
   });
@@ -36,18 +38,16 @@ describe('<App />', () => {
         .onFindPetsClick();
       expect(
         fetchMock.called('/api/pets'),
-        'The right API URL is not being fetched when finding pets.'
+        'The right API URL is not being fetched when finding pets.',
       ).to.be.true;
     });
 
     it('should fetch pet types using the type parameter based on the filter', () => {
       const wrapper = shallow(<App />);
 
-      ['cat', 'dog', 'micropig'].forEach(type => {
+      ['cat', 'dog', 'micropig'].forEach((type) => {
         wrapper.setState({
-          filters: Object.assign({}, wrapper.state().filters, {
-            type: type
-          })
+          filters: { ...wrapper.state().filters, type },
         });
         wrapper
           .find(Filters)
@@ -55,7 +55,7 @@ describe('<App />', () => {
           .onFindPetsClick();
         expect(
           fetchMock.called(`/api/pets?type=${type}`),
-          'The right API URL is not being fetched when finding pets.'
+          'The right API URL is not being fetched when finding pets.',
         ).to.be.true;
       });
     });
@@ -71,7 +71,7 @@ describe('<App />', () => {
         age: 4,
         weight: 1,
         name: 'Trident',
-        isAdopted: false
+        isAdopted: false,
       };
     });
 
@@ -83,7 +83,9 @@ describe('<App />', () => {
         .props()
         .onAdoptPet(trident.id);
 
-      expect(wrapper.state().pets).to.deep.equal([{ ...trident, isAdopted: true }]);
+      expect(wrapper.state().pets).to.deep.equal([
+        { ...trident, isAdopted: true },
+      ]);
     });
   });
 });
