@@ -52,7 +52,6 @@ class App extends React.Component {
   };
 
   render() {
-    console.log(this.state.pets);
     const { pets } = this.state;
     return (
       <div className='ui container'>
