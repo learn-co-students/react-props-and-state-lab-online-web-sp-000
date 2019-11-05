@@ -38,8 +38,7 @@ class App extends React.Component {
     })
   }
 
-  handleAdoption = (event) => {
-    const petId = event.target.id
+  handleAdoption = (petId) => {
     this.setState(prevState => ({
       pets: prevState.pets.map(
         pet => (pet.id === petId ? Object.assign(pet, { isAdopted: true }) : pet)

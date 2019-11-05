@@ -8,6 +8,7 @@ class PetBrowser extends React.Component {
       return <Pet pet={pet} />
     })
   }
+
   render() {
     return (
       <div className="ui cards">
