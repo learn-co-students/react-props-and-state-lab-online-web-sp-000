@@ -58,12 +58,14 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
+              {/* pass callback props onChangeType and onFindPetsClick */}
               <Filters 
                 onChangeType = {this.handleChangeType}
                 onFindPetsClick = {this.handleFindPetsClick}
               />
             </div>
             <div className="twelve wide column">
+              {/* pass prop with fetch request data and pass a callback prop onAdoptPet */}
               <PetBrowser 
                 pets = {this.state.pets}
                 onAdoptPet = {this.handleAdoptPet}

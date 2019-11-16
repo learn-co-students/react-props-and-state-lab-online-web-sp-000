@@ -6,6 +6,7 @@ class Pet extends React.Component {
       <div className="card">
         <div className="content">
           <a className="header">
+            {/* Receive the pet prop */}
             {/*'♀' OR '♂' */}
             {this.props.pet.gender === 'male' ? ' ♂ ' : ' ♀ '}
             {this.props.pet.name}
@@ -20,6 +21,7 @@ class Pet extends React.Component {
           </div>
         </div>
         <div className="extra content">
+        {/* Receive the onAdoptPet callback prop */}
         {this.props.pet.isAdopted ? 
             (<button className="ui disabled button">Already adopted</button>) :
             (<button onClick={() => this.props.onAdoptPet(this.props.pet.id)} className="ui primary button">
