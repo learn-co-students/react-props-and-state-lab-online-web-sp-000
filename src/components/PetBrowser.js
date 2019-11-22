@@ -3,8 +3,19 @@ import React from 'react'
 import Pet from './Pet'
 
 class PetBrowser extends React.Component {
+  renderPets = () => {
+    this.props.pets.forEach(pet => {
+      return <Pet pet={pet} />
+    })
+  }
+
   render() {
-    return <div className="ui cards">PET COMPONENT SHOULD GO HERE</div>
+    debugger
+    return (
+      <div className="ui cards">
+        {this.renderPets()}
+      </div>
+    )
   }
 }
 
