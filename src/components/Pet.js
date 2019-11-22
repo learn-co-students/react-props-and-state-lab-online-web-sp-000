@@ -9,13 +9,20 @@ class Pet extends React.Component {
     }
   }
 
+  displayAdoptButton = () => {
+    if(this.props.pet.isAdopted === true) {
+      return <button className="ui disabled button">Already adopted</button>
+    } else {
+      return <button onClick={() => this.props.onAdoptPet(this.props.pet.id)} className="ui primary button">Adopt pet</button>
+    }
+  }
+
   render() {
-    debugger
     return (
       <div className="card">
         <div className="content">
           <a className="header">
-            {this.displayGender}
+            {this.displayGender()}
             {this.props.pet.name}
           </a>
           <div className="meta">
@@ -27,8 +34,7 @@ class Pet extends React.Component {
           </div>
         </div>
         <div className="extra content">
-          <button className="ui disabled button">Already adopted</button>
-          <button className="ui primary button">Adopt pet</button>
+          {this.displayAdoptButton()}
         </div>
       </div>
     )

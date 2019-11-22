@@ -37,7 +37,14 @@ class App extends React.Component {
 
   onAdoptPet = id => {
     let pet = this.state.pets.find(pet => pet.id === id)
+    let index = this.state.pets.indexOf(pet);
+    if (index > -1) {
+      this.state.pets.splice(index, 1);
+    }
     pet.isAdopted = true
+    this.setState({
+      pets: [...this.state.pets, pet]
+    })
   }
 
   render() {
