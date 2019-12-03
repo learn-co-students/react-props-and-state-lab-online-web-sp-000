@@ -2,6 +2,7 @@ import React from 'react'
 
 import Filters from './Filters'
 import PetBrowser from './PetBrowser'
+// import fetchMock from '../fetch-setup.js'
 
 class App extends React.Component {
   constructor() {
@@ -15,6 +16,43 @@ class App extends React.Component {
     }
   }
 
+  onChangeType = event => {
+    this.setState({
+      filters:{
+        type: event.target.value
+      }
+    })
+  }
+
+  onFindPetsClick = () => {
+    if(this.state.filters.type !== "all"){
+      fetch(`/api/pets?type=${this.state.filters.type}`)
+      .then(resp => resp.json())
+      .then(json => {
+        this.setState({
+          pets: json
+        })
+      })
+    }else{
+      fetch(`/api/pets`)
+      .then(resp => resp.json())
+      .then(json => {
+        this.setState({
+          pets: json
+        })
+      } ) 
+    }
+  }
+
+  onAdoptPet = (id) =>{
+    console.log(id)
+   let p = this.state.pets.find(function(pet){
+      return pet.id === id     
+   })
+    p.isAdopted = true;
+  }
+
+
   render() {
     return (
       <div className="ui container">
@@ -24,10 +62,10 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters onChangeType={this.onChangeType} onFindPetsClick={this.onFindPetsClick}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser pets={this.state.pets} onAdoptPet={id => this.onAdoptPet(id)}/>
             </div>
           </div>
         </div>
