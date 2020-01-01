@@ -5,6 +5,9 @@ class Filters extends React.Component {
   onChangeHandler = event => {
     // console.log(event.target.value)
     this.props.onChangeType(event.target.value)
+  }
+
+  onClickHandler = event => {
     this.props.onFindPetsClick()
   }
 
@@ -22,7 +25,7 @@ class Filters extends React.Component {
         </div>
 
         <div className="field">
-          <button className="ui secondary button">Find pets</button>
+          <button className="ui secondary button" onClick={this.onClickHandler}>Find pets</button>
         </div>
       </div>
     )
