@@ -15,6 +15,69 @@ class App extends React.Component {
     }
   }
 
+  changeType = (t) => {
+    setState({
+      filters: {
+        type: t
+      }
+    })
+  }
+//check what json is
+  findPetsClick = () => {
+    if(this.state.filters.type === 'all'){
+      fetch('/api/pets')
+      .then( response => response.json())
+      .then( (json) => {
+        this.setState({
+          pets: json
+        })
+      })
+    }else if(this.state.filters.type === 'cat'){
+      fetch('/api/pets?type=cat')
+      .then(response => response.json())
+      .then( (json) => {
+        this.setState({
+          pets: json
+        })
+      })
+    }else if(this.state.filters.type === 'dog'){
+      fetch('/api/pets?type=dog')
+      .then(response => response.json())
+      .then( (json) => {
+        this.setState({
+          pets: json
+        })
+      })
+    }else if(this.state.filters.type === 'micropig'){
+      fetch('/api/pets?type=micropig')
+      .then( response => response.json())
+      .then( (json) => {
+        this.setState({
+          pets: json
+        })
+      })
+    }else{
+      fetch('/api/pets')
+      .then(response => response.json())
+      .then( (json) => {
+        this.setState({
+          pets: json
+        })
+      })
+    }
+    
+  }
+
+  adoptPet = (id) => {
+    this.state.pets.map( (pet) => {
+      console.log("pet:", pet);
+      if(pet.id === id){
+        console.log("pet.id:", pet.id)
+        pet.isAdopted = true
+      }
+    })
+  }
+
   render() {
     return (
       <div className="ui container">
@@ -24,10 +87,10 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters onChangeType={this.changeType} onFindPetsClick={this.findPetsClick}  />
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser onAdoptPet={this.adoptPet} pets={this.state.pets}/>
             </div>
           </div>
         </div>
