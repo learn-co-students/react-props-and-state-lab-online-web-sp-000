@@ -10,7 +10,7 @@ class App extends React.Component {
       pets: [],
       filters: {
         type: 'all',
-        parameter: ''
+        //parameter: ''
       }
     }
   }
