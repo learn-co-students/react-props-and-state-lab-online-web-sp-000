@@ -23,9 +23,11 @@
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",
     "expect": "^21.2.1",
+    "npm": "^6.13.7",
     "react": "^16.0.0",
     "react-dom": "^16.3.3",
     "sinon": "^1.17.7",
+    "test": "^0.6.0",
     "whatwg-fetch": "^2.0.3"
   },
   "scripts": {
