@@ -4,54 +4,55 @@ import Filters from './Filters'
 import PetBrowser from './PetBrowser'
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.onChangeType = this.onChangeType.bind(this);
+    //this.onFindPetsClick = this.onFindPetsClick.bind(this);
     this.state = {
       pets: [],
       filters: {
-        type: 'all',
-        //parameter: ''
+        type: 'all'
       }
     }
   }
 
-  onChangeType = (differentType) => {
+  onChangeType(event){
     this.setState({
       filters: {
-        type: differentType
+        type: event.target.value
       }
     });
   }
+  //doSetState = (stateObject) => {}
 
   onFindPetsClick = (event) => {
-    let parameter;
-    switch (this.state.type){
-      case 'dog':
-        parameter = "?type=dog";
-        break;
-      case 'cat':
-        parameter = "?type=cat";
-        break;
-      case 'micropig':
-        parameter = "?type=micropig";
-        break;
-      default:
-        parameter = '';
-        break;
+    let parameter = '';
+    console.log(this.state.filters.type);
+    if (this.state.filters.type !== 'all'){
+      parameter = '?type=' + this.state.filters.type;
     }
 
+    const that = this;
     return fetch('/api/pets' + parameter)
       .then(function(response) {
         return response.json();
       })
       .then(function(json){
         console.log(json);
-        //this.state.pets = [...json]//this.state.pets = [...json];
+        that.setState({
+          pets: json
+        });
+
 
       });
   }
 
-  onAdoptPet = () => {}
+  onAdoptPet = (id) => {
+    const pets = this.state.pets.map(p => {
+      return p.id === id ? { ...p, isAdopted: true } : p;
+    });
+    this.setState({ pets: pets });
+  }
 
   render() {
     return (
