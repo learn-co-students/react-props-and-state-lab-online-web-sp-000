@@ -89,6 +89,7 @@ describe('<Pet />', () => {
         const spy = sinon.spy();
         const wrapper = shallow(<Pet pet={FEMALE_CAT} onAdoptPet={spy} />);
         wrapper.find('button.ui.primary.button').simulate('click');
+        console.log(spy.firstCall.args, FEMALE_CAT.id)
         expect(spy.firstCall.args[0]).to.equal(FEMALE_CAT.id);
       });
     });
