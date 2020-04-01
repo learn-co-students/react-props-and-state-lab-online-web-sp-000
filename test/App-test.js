@@ -53,6 +53,7 @@ describe('<App />', () => {
           .find(Filters)
           .props()
           .onFindPetsClick();
+          console.log(`/api/pets?type=${type}`)
         expect(
           fetchMock.called(`/api/pets?type=${type}`),
           'The right API URL is not being fetched when finding pets.'
