@@ -36,14 +36,12 @@ class App extends React.Component {
      this.setState({
           pets: pets
       })  
-      
     }) 
   }
 
   onAdoptPet = (id) => {
     const petArray = this.state.pets.map(pet => {
       if (id === pet.id) {
-        
         return {
             ...pet,
             isAdopted: true
@@ -55,7 +53,6 @@ class App extends React.Component {
     this.setState({
         pets: petArray 
       })
-    
   }
 
   render() {
