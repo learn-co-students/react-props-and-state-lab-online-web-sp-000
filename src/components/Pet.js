@@ -2,7 +2,15 @@ import React from 'react'
 
 class Pet extends React.Component {
   render() {
-    
+  
+      <Pet 
+        name={this.props.pet.name}
+        gender={this.props.pet.gender}  
+        age={this.props.pet.age}
+        weight={this.props.pet.weight}
+        type={this.props.pet.type}
+      />
+
     return (
       <div className="card">
         <div className="content">
