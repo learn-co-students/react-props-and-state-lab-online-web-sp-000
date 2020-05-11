@@ -4,31 +4,28 @@ import Pet from './Pet'
 
 class PetBrowser extends React.Component {
 
-  genPetCards = () => {
+  genPetCards = () =>
     this.props.pets.map(pet =>
-      <Pet pet={pet} onAdoptPet={this.props.onAdoptPet(pet.id)}/>
-    )
-  }
+      <Pet pet={pet} key={pet.id} onAdoptPet={this.props.onAdoptPet} />
+    );
 
   render() {
     return <div className="ui cards">{this.genPetCards()}</div>
   }
+
+
+  //render() {
+  // petCards = () => this.props.pets.map(pet =>
+  //   //let petCards = this.props.pets.map(pet => (
+  //   //const petCards = this.props.pets.map(pet => (
+  //   <Pet pet={pet} key={pet.id} onAdoptPet={this.props.onAdoptPet} />
+  //     // <Pet pet={pet} onAdoptPet={this.props.onAdoptPet} />
+  // );
+  //
   // render() {
-  //   const petCards = this.props.pets.map(pet => (
-  //     <Pet pet={pet} key={pet.id} onAdoptPet={this.props.onAdoptPet} />
-  //   ));
-  //   return <div className="ui cards">{petCards}</div>;
+  //   return <div className="ui cards">{this.petCards()}</div>;
   // }
 }
-
-
-// render() {
-//   const petCards = this.props.pets.map(pet => (
-//     <Pet pet={pet} key={pet.id} onAdoptPet={this.props.onAdoptPet} />
-//   ));
-//   return <div className="ui cards">{petCards}</div>;
-// }
-
 
 //Prop that has been assigned to PetBrowser component:
 //pets={this.props.pets}

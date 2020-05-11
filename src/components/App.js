@@ -42,17 +42,17 @@ class App extends React.Component {
   }
 
   /////////////////////////////////////////////////////////////////////////////////
-  onAdoptPet = (petId) => {
-    // let statePetsArray = this.state.pets.slice();
-    // let newlyAdoptedPet = statePetsArray.find(pet => pet.id === id);
-    // let index = statePetsArray.indexOf(newlyAdoptedPet);
-    // statePetsArray[index].isAdopted = true;
-    // this.setState({pets: statePetsArray}, () => console.log(this.state))
+  onAdoptPet = (id) => {
+    let statePetsArray = this.state.pets.slice();
+    let newlyAdoptedPet = statePetsArray.find(pet => pet.id === id);
+    let index = statePetsArray.indexOf(newlyAdoptedPet);
+    statePetsArray[index].isAdopted = true;
+    this.setState({pets: statePetsArray}, () => console.log(this.state))
 
-    const newPetsArray = this.state.pets.map(p => {
-      return p.id === petId ? { ...p, isAdopted: true } : p;
-    });
-    this.setState({ pets: newPetsArray });
+    // const newPetsArray = this.state.pets.map(p => {
+    //   return p.id === petId ? { ...p, isAdopted: true } : p;
+    // });
+    // this.setState({ pets: newPetsArray });
   }
   /////////////////////////////////////////////////////////////////////////////////
 
@@ -68,7 +68,7 @@ class App extends React.Component {
               <Filters onChangeType={event => this.onChangeType(event)} onFindPetsClick={this.onFindPetsClick}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser onAdoptPet={this.onAdoptPet()} pets={this.state.pets}/>
+              <PetBrowser onAdoptPet={this.onAdoptPet} pets={this.state.pets}/>
             </div>
           </div>
         </div>
