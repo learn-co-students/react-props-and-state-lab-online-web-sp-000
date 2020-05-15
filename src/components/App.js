@@ -27,7 +27,7 @@ class App extends React.Component {
     if (this.state.filters.type === "all") {
       url = "/api/pets"
     } else {
-      url = '/api/pets?type=${this.state.filters.type}'
+      url = `/api/pets?type=${this.state.filters.type}`
     }
     fetch(url)
     .then(res => res.json())
