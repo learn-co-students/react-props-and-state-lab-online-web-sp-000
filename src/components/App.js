@@ -32,14 +32,10 @@ class App extends React.Component {
   }
 
   adoptPet = (id) => {
-    // find the pet with matching id in pet state array
-    let pet = this.state.pets.find(pet => pet.id === id)
-    pet.setState({
-      isAdopted: true
-    })
-    //pet.props.isAdopted = true
-    //! set that pet's isAdopted property to true
-    console.log(pet);
+    let newState = Object.assign({}, this.state);
+    let pet = newState.pets.find(pet => pet.id === id);
+    pet.isAdopted = true;
+    this.setState(newState);
   }
 
   render() {
