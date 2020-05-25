@@ -15,32 +15,27 @@ class App extends React.Component {
     }
   }
 
-  fetchPets = (type='all') => {
-    this.filterType(type)
-    console.log('in fetchPets after onClickFindPets')
-    let url = '/api/pets';
-  //! there will be an optional filter parameter. If present, state needs to be 
-  //! updated first, then conditional can be checked for url
+  onChangeType = ({target: {value}}) => {
+    this.setState({filters: {...this.state.filters, type: value}});
+  };
 
-    // if (this.state.filters.type !== 'all') {
-    //   filterType(type)
-    //   url = url + '?type=' + type
-    // }
-    // fetch(url)
-    // .then(response => response.json())
-    // .then(pets => {
-    //   console.log(pets)
-    // })
+  fetchPets = () => {
+    let url = '/api/pets';
+    if (this.state.filters.type !== 'all') {
+      url = url + `?type=${this.state.filters.type}`;
+    }
+    fetch(url)
+    .then(response => response.json())
+    .then(pets => {
+      this.setState({pets:pets});
+    })
   }
 
-  filterType = (newFilterType='all') => {
-    this.setState({
-      filters: {
-        ...this.state.filters,
-        type: newFilterType
-      }
-    })
-  };
+  adoptPet = (id) => {
+    //! find the pet with matching id in pet state array
+    //! set that pet's isAdopted property to true
+    console.log(this.state);
+  }
 
   render() {
     return (
@@ -51,10 +46,10 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters onChangeType={this.filterType} onFindPetsClick={this.fetchPets}/>
+              <Filters onChangeType={this.onChangeType} onFindPetsClick={this.fetchPets}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser pets={this.state.pets} onAdoptPet={this.adoptPet}/>
             </div>
           </div>
         </div>
