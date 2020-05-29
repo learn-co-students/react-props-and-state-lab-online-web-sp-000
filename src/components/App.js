@@ -15,6 +15,31 @@ class App extends React.Component {
     }
   }
 
+  onChangeType = event => {
+    this.setState({
+      filters: {
+        type: event.target.value
+      }
+    })
+  }
+
+  onFindePetsClick = event => {
+    let address
+    if(this.state.filters.type == 'all') {
+      address = '/api/pets'
+    }
+    else {
+      address = `/api/pets?type=${this.state.filters.type}`
+    }
+    fetch(address)
+    .then(resp => resp.json())
+    .then(json => this.setState({
+      pets: json
+    }))
+  }
+
+  
+
   render() {
     return (
       <div className="ui container">
@@ -24,10 +49,10 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters onChangeType={this.onChangeType} onFindPetsClick={this.onFindePetsClick} />
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser pets={this.state.pets}  />
             </div>
           </div>
         </div>
