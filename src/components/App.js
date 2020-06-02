@@ -25,31 +25,22 @@ class App extends React.Component {
 
 
   getPets = () => {
-    // console.log("executing getPets: " + query)
-    if (this.state.filters.type === "all" || !this.state.filters.type) {
-      fetch(`/api/pets`)
-        .then(resp => resp.json())
-        .then((object) => {
-          this.setState({
-            pets: object
-          }, console.log(object))
-        })
-        .catch((error) => {
-          alert(error.message)
-        })      
-    } else {
-      fetch(`/api/pets?type=${this.state.filters.type}`)
-        .then(resp => resp.json())
-        .then((object) => {
-          this.setState({
-            pets: object
-          }, console.log(object))
-        })
-        .catch((error) => {
-          alert(error.message) 
-        })  
-    }
+    let endpoint = "/api/pets"
 
+    if (this.state.filters.type != "all") {
+      endpoint += `?type=${this.state.filters.type}`
+    }
+    
+    fetch(endpoint)
+      .then(resp => resp.json())
+      .then((object) => {
+        this.setState({
+          pets: object
+        }, console.log(object))
+      })
+      .catch((error) => {
+        alert(error.message)
+      })      
   }
 
   adoptPet = (petID) => {
