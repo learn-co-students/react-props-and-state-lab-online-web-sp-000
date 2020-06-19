@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Filters from './Filters'
 import PetBrowser from './PetBrowser'
 
@@ -15,6 +14,33 @@ class App extends React.Component {
     }
   }
 
+  onFindPetsClick = () => {
+    //console.log('onFindPetsClick')
+    if (this.state.filters.type === 'all'){
+      fetch('/api/pets')
+        .then(res => res.json())
+        .then(petsArray => this.setState({pets: petsArray}))
+    }else{
+      fetch(`/api/pets?type=${this.state.filters.type}`)
+        .then(res => res.json())
+        .then(petsArray => this.setState({pets: petsArray}))
+    }
+  }
+
+  onAdoptPet = (petId) => {
+    const updatedPetArray = this.state.pets.map(pet => {
+      return pet.id === petId ? {...pet, isAdopted: true} : pet
+    })
+
+    this.setState({ pets: updatedPetArray })
+  }
+
+  onChangeType = (event) => {
+    const filer = event.target.value
+    this.setState( {...this.state.filters, type: filter} )
+  }
+
+
   render() {
     return (
       <div className="ui container">
@@ -24,10 +50,10 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters onFindPetsClick={this.onFindPetsClick} onChangeType={this.onChangeType}  />
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser onAdoptPet={this.onAdoptPet} pets={this.state.pets} />
             </div>
           </div>
         </div>
