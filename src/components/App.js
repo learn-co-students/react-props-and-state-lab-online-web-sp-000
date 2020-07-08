@@ -11,40 +11,57 @@ class App extends React.Component {
       pets: [],
       filters: {
         type: 'all'
-      }
+      },
+      isAdopted: 'false'
     }
+  }
+
+  goThroughData= (data) => {
+    this.setState({
+      pets: data
+    })
   }
 
   onChangeType = (type) => {
     this.setState({
-      ...this.state.filters,
-      type: type
+      filters: {
+        ...this.state.filters,
+        type: type
+      }
     })
   }
 
   onFindPetsClick = () => {
-    // let formData = {
-    //   type: 'all'
-    // };
+   let option = this.state.filters.type
 
-    // let option = this.state.filters.type
-     
-    // let configObj = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Accept": "application/json"
-    //   },
-    //   body: JSON.stringify(formData)
-    // };
-    
-    fetch("api/pets")
-    .then(response => response.json())
-    .then(data => console.log(data));
+    if (option === 'all'){
+      fetch("/api/pets")
+      .then(response => response.json())
+      .then(data => this.goThroughData(data))
+    }
+    else {
+      fetch(`/api/pets?type=${this.state.filters.type}`)
+      .then(response => response.json())
+      .then(data => this.goThroughData(data))
+    }
+  }
 
+  onAdoptPet = (id) => {
+    this.state.pets.forEach(element => {
+      if (id === element.id){
+        this.setState({
+          isAdopted: 'true'
+        })
+      }
+      else {
+        console.log(element.id)
+        console.log(id)
+      }
+    })
   }
 
   render() {
+
     return (
       <div className="ui container">
         <header>
@@ -56,7 +73,7 @@ class App extends React.Component {
               <Filters onChangeType={this.onChangeType} onFindPetsClick={this.onFindPetsClick}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser onAdoptPet={this.onAdoptPet} pets={this.state.pets}/>
             </div>
           </div>
         </div>
