@@ -15,6 +15,35 @@ class App extends React.Component {
     }
   }
 
+  onChangeType = (type) => {
+    this.setState({
+      ...this.state.filters,
+      type: type
+    })
+  }
+
+  onFindPetsClick = () => {
+    // let formData = {
+    //   type: 'all'
+    // };
+
+    // let option = this.state.filters.type
+     
+    // let configObj = {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "Accept": "application/json"
+    //   },
+    //   body: JSON.stringify(formData)
+    // };
+    
+    fetch("api/pets")
+    .then(response => response.json())
+    .then(data => console.log(data));
+
+  }
+
   render() {
     return (
       <div className="ui container">
@@ -24,7 +53,7 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters onChangeType={this.onChangeType} onFindPetsClick={this.onFindPetsClick}/>
             </div>
             <div className="twelve wide column">
               <PetBrowser />
