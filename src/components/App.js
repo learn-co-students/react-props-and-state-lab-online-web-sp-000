@@ -12,7 +12,6 @@ class App extends React.Component {
       filters: {
         type: 'all'
       },
-      isAdopted: 'false'
     }
   }
 
@@ -47,16 +46,16 @@ class App extends React.Component {
   }
 
   onAdoptPet = (id) => {
-    this.state.pets.forEach(element => {
+    const pets = this.state.pets.map(element => {
       if (id === element.id){
-        this.setState({
-          isAdopted: 'true'
-        })
+       return {...element, isAdopted: true}
       }
       else {
-        console.log(element.id)
-        console.log(id)
+        return element
       }
+    })
+    this.setState({
+        pets: pets
     })
   }
 
