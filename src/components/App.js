@@ -19,7 +19,7 @@ class App extends React.Component {
     this.setState({
       filters: {
         ...this.state.filters,
-        type: data
+        type: data.target.value
       }
     })
   }
@@ -33,7 +33,16 @@ class App extends React.Component {
 
     fetch(url)
       .then(resp => resp.json())
-      .then(data => data)
+      .then(data => this.setState({
+        pets: data
+      }))
+  }
+
+  onAdoptPet = (keyId) => {
+    const pet = this.state.pets.map(element => {
+      return element.id === keyId ? {...element, isAdopted: true} : element;
+    })
+    this.setState({pet})
   }
 
   render() {
@@ -51,7 +60,9 @@ class App extends React.Component {
               />
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser
+              pets={this.state.pets}
+              onAdoptPet={this.onAdoptPet} />
             </div>
           </div>
         </div>
