@@ -22,7 +22,7 @@ class Pet extends React.Component {
           </div>
         </div>
         <div className="extra content">
-        { this.props.isAdopted ?
+        { this.props.pet.isAdopted ?
           <button className="ui disabled button">
             Already adopted
           </button> :
