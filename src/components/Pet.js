@@ -2,11 +2,12 @@ import React from 'react'
 
 class Pet extends React.Component {
   render() {
+    // debugger
     return (
       <div className="card">
         <div className="content">
           <a className="header">
-            {/*'♀' OR '♂' */}
+            {this.props.pet.name}
             PET NAME
           </a>
           <div className="meta">
