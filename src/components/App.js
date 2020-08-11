@@ -18,8 +18,10 @@ class App extends React.Component {
   }
  
 
+
   fetchPets = () => {
      let animalApi = '/api/pets'
+
      // we need a variable to put condition statment 
      //we dont want to find all the pets we want to find some pets 
      //when someone clicked to drop down State got to updated 
@@ -34,10 +36,12 @@ class App extends React.Component {
        .then(r => r.json())
        .then(json =>{
         this.setState({
+
           pets:json
          
         })
-      
+        console.log(json)
+
        } )
        //   You can run fetch in the console so you can see that you have written it correctly.
        //  If the type is 'all', send a request to /api/pets
@@ -69,6 +73,7 @@ class App extends React.Component {
      // the function on adapt receives an argument a petId and base on padid only updateds 
      // the animal which is adopted state will reflect that there is something new
      // its gonna give and id essesntial you will find pet by id and update just one property isAdopted:
+
      // when you change this pet all group will re-set in state and you use setState again.
      // Because I  just did one change and I have to setState again
      //1-function argument which is Id then you can start think how can i find pet a giving an id
@@ -114,7 +119,14 @@ class App extends React.Component {
               <Filters  onChangeType={this.onChangeType} onFindPetsClick={this.onFindPetsClick} />           
             </div>
             <div className="twelve wide column">
+
               <PetBrowser onAdoptPet={this.onAdoptPet} pets={this.state.pets} />
+
+           
+            
+
+              
+
               
             </div>
           </div>
@@ -123,5 +135,8 @@ class App extends React.Component {
     )
   }
 }
+// Finally, App should pass a callback prop, onAdoptPet, to <PetBrowser />. (line115)
+
 
 export default App
+
