@@ -18,8 +18,8 @@ class App extends React.Component {
   }
  
 
-  fetchPets() {
-     let  animalApi = '/api/pets'
+  fetchPets = () => {
+     let animalApi = '/api/pets'
      // we need a variable to put condition statment 
      //we dont want to find all the pets we want to find some pets 
      //when someone clicked to drop down State got to updated 
@@ -34,10 +34,10 @@ class App extends React.Component {
        .then(r => r.json())
        .then(json =>{
         this.setState({
-          pets:json,
+          pets:json
          
         })
-        console.log(json)
+      
        } )
        //   You can run fetch in the console so you can see that you have written it correctly.
        //  If the type is 'all', send a request to /api/pets
@@ -69,24 +69,26 @@ class App extends React.Component {
      // the function on adapt receives an argument a petId and base on padid only updateds 
      // the animal which is adopted state will reflect that there is something new
      // its gonna give and id essesntial you will find pet by id and update just one property isAdopted:
-     // when you change this ped all group will re-set in state and you use setState again.
-     // Because i just did one change and i have to setState again
-     //1-function argument which is Id then you can start think how can i find pet agiving an id
-     //PROPS ARE  PASS DOWN I HAVE TO USE THEM STATE IS SOMETHING WHEN USER CLICK I UPDATE STATE  
+     // when you change this pet all group will re-set in state and you use setState again.
+     // Because I  just did one change and I have to setState again
+     //1-function argument which is Id then you can start think how can i find pet a giving an id
+     //PROPS ARE  PASS DOWN I HAVE TO USE THEM , STATE IS SOMETHING WHEN USER CLICK I UPDATE STATE  
       
      
-     adoptPets(id){
-       console.log(this.state,"adoptPetState")
-      this.fetchPets().then(response => {
-         this.setState({
-           id: response.id
-         });
-        });
-     
-    
+     onAdoptPet = (id) => {
+        const adoPet = this.state.pets.map((pet)=> {
+         return pet.id === id ? {...pet,
+          isAdopted:true 
+        } : pet;
+       // mapped over each pet from pets object and get all pet.id = id  parameter then
+       //with spread operator copy all the property of the pet object and just changed isAdopted:true or pass unchanged pet
 
-
-
+        }) 
+        this.setState({
+          pets: adoPet 
+          // set our state again and passed adoPet which we assign this variable to our new array( mapped pet) 
+        
+        })
       }
       
       
@@ -112,12 +114,7 @@ class App extends React.Component {
               <Filters  onChangeType={this.onChangeType} onFindPetsClick={this.onFindPetsClick} />           
             </div>
             <div className="twelve wide column">
-              <PetBrowser adoptButton={this.adoptPets}
-              
-                pets={this.state.pets}
-              />
-
-              
+              <PetBrowser onAdoptPet={this.onAdoptPet} pets={this.state.pets} />
               
             </div>
           </div>
@@ -126,7 +123,5 @@ class App extends React.Component {
     )
   }
 }
-// Finally, App should pass a callback prop, onAdoptPet, to <PetBrowser />. (line115)
-
 
 export default App
