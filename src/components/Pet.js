@@ -3,7 +3,7 @@ import React from 'react'
 class Pet extends React.Component {
   render() {
     // destructure the props
-    const { name, type, age, weight, gender, isAdopted } = this.props.pet
+    const { name, type, age, weight, gender, isAdopted, id } = this.props.pet
     const { onAdoptPet } = this.props
     return (
       <div className="card">
@@ -22,7 +22,7 @@ class Pet extends React.Component {
         </div>
         <div className="extra content">
           <button className="ui disabled button">Already adopted</button>
-          <button className="ui primary button" onClick={onAdoptPet} >Adopt pet</button>
+          <button className="ui primary button" onClick={() => onAdoptPet(id)} >Adopt pet</button>
         </div>
       </div>
     )
