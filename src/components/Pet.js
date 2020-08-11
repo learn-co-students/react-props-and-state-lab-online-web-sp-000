@@ -2,13 +2,14 @@ import React from 'react'
 
 class Pet extends React.Component {
 
-  adopetedButton = () => {
-  this.props.pet.isAdopted === true ? <button> Already Adopted </button> : <button onClick={this.props.onAdoptPet}  adoptButton={this.props.adoptButton}>Adopted</button>
+  adoptedButton = () => {
+    
+  return this.props.pet.isAdopted === true ? <button className="ui disabled button"> Already Adopted </button> : <button className="ui primary button" onClick={() => this.props.onAdoptPet(this.props.pet.id)}>Adopt Pet</button>
   
    
   }
   render() {
-
+  console.log("pet",this.props.pet.isAdopted)
     // debugger
     return (
       <div className="card">
@@ -30,8 +31,7 @@ class Pet extends React.Component {
           </div>
         </div>
         <div className="extra content">
-          <button  className="ui disabled button">Already adopted</button>
-          <button  className="ui primary button">Adopt pet</button>
+          {this.adoptedButton()}
         </div>
       </div>
     )

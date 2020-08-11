@@ -5,7 +5,7 @@ import Pet from './Pet'
 class PetBrowser extends React.Component {
   render() {
    const petsCard = this.props.pets.map((pet)=> {
-    return <Pet onClick={this.props.onAdoptPet} pet={pet} adoptButton={this.props.adoptButton}/>
+    return <Pet onAdoptPet={this.props.onAdoptPet} pet={pet}/>
      })
      
      // line 7  we map over state which is coming from app component which is the array of all the pets 
