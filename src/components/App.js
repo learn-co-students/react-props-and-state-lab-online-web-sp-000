@@ -42,16 +42,14 @@ class App extends React.Component {
     })
   }
 
-  onAdoptPet = (id) => {
+  onAdoptPet = (pet) => {
     // set the state of a pet from the opposite of what it was...
-    const pet = { ...this.state.pets.find(p => p.id === id )}
-    pet.isAdopted = pet.isAdopted ? false : true
-    debugger
+    let petsArrayCopy = [...this.state.pets]
+    let thePet = petsArrayCopy.find(p => p.id === pet)
+    thePet.isAdopted = true
     this.setState({
-      pets: [...this.state.pets.slice(0, index), pet,
-      ...this.state.pets(index, this.state.pets.length)]
+      pets: petsArrayCopy
     })
-    console.log(pet)
   }
 
 
