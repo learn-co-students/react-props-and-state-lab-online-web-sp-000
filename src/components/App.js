@@ -1,18 +1,25 @@
 import React from 'react'
-
 import Filters from './Filters'
 import PetBrowser from './PetBrowser'
+let FETCH_URL = '/api/pets'
+
+
 
 class App extends React.Component {
-  constructor() {
+  constructor(props) {
+    console.log(props)
     super()
-
     this.state = {
       pets: [],
       filters: {
         type: 'all'
       }
     }
+  }
+  onChangeType = () => {
+    this.setState({
+      pets: []
+    })
   }
 
   render() {
