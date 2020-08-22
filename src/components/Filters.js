@@ -1,14 +1,12 @@
 import React from 'react'
-import App from './App'
 
 export default class Filters extends React.Component {
   render() {
-    console.log(this.props)
     return (
-      <div className="ui form" onChange={event => this.props.onChangeType(event)}>
+      <div className="ui form" >
         <h3>Animal type</h3>
         <div className="field">
-          <select name="type" id="type">
+          <select name="type" id="type" onChange={event => this.props.onChangeType(event.target.value)}>
             <option value="all">All</option>
             <option value="cat">Cats</option>
             <option value="dog">Dogs</option>

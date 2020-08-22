@@ -1,7 +1,7 @@
 import React from 'react'
 import Filters from './Filters'
 import PetBrowser from './PetBrowser'
-let FETCH_URL = '/api/pets'
+let MAIN_URL = '/api/pets'
 
 class App extends React.Component {
   constructor() {
@@ -13,6 +13,11 @@ class App extends React.Component {
       }
     }
   }
+  onAdoptPet = (id) => {
+    if (this.state.pets) {
+      this.state.pets.find(e => e.id === id).isAdopted = true
+    } 
+  }
   onChangeType = (type) => {
     this.setState({
       filters: Object.assign({}, this.state.filters, {
@@ -20,10 +25,28 @@ class App extends React.Component {
       })
     })
   }
-  onFindPetsClick = () => {
-    fetch(FETCH_URL)
+  fetch_URL = () => {
+    if (this.state.filters.type === 'all') {
+      return MAIN_URL
+    } else if (this.state.filters.type === 'dog') {
+      return MAIN_URL + '?type=' + `${this.state.filters.type}`
+    } else if (this.state.filters.type === 'cat') {
+      return MAIN_URL + '?type=' + `${this.state.filters.type}`
+    } else if (this.state.filters.type === 'micropig') {
+      return MAIN_URL + '?type=' + `${this.state.filters.type}`
+    } 
+  }
+  fetching = () => {
+    fetch(this.fetch_URL())
     .then(response => response.json())
-    .then(obj => obj)
+    .then(obj => {
+      this.setState({
+        pets: obj
+      })
+    })
+  }
+  onFindPetsClick = () => {
+    this.fetching()
   }
   render() {
     return (
@@ -37,7 +60,7 @@ class App extends React.Component {
               <Filters onChangeType={this.onChangeType} onFindPetsClick={this.onFindPetsClick}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser onAdoptPet={this.onAdoptPet} pets={this.state.pets}/>
             </div>
           </div>
         </div>
