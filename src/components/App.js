@@ -3,11 +3,8 @@ import Filters from './Filters'
 import PetBrowser from './PetBrowser'
 let FETCH_URL = '/api/pets'
 
-
-
 class App extends React.Component {
-  constructor(props) {
-    console.log(props)
+  constructor() {
     super()
     this.state = {
       pets: [],
@@ -16,12 +13,18 @@ class App extends React.Component {
       }
     }
   }
-  onChangeType = () => {
+  onChangeType = (type) => {
     this.setState({
-      pets: []
+      filters: Object.assign({}, this.state.filters, {
+        type: type
+      })
     })
   }
-
+  onFindPetsClick = () => {
+    fetch(FETCH_URL)
+    .then(response => response.json())
+    .then(obj => obj)
+  }
   render() {
     return (
       <div className="ui container">
@@ -31,7 +34,7 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters onChangeType={this.onChangeType} onFindPetsClick={this.onFindPetsClick}/>
             </div>
             <div className="twelve wide column">
               <PetBrowser />
