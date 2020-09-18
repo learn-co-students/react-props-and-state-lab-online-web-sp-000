@@ -1,11 +1,12 @@
 import React from 'react'
 
 class Pet extends React.Component {
-  render() {
-    this.handleClick = () => {
+  
+   handleClick = () => {
       this.props.onAdoptPet(this.props.pet.id)
-    }
-
+    }  
+  
+  render() {
     return (
       <div className="card">
         <div className="content">
