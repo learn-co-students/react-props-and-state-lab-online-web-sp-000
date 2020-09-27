@@ -9,7 +9,7 @@ class App extends React.Component {
 
     this.state = {
       pets: [],
-      adoptedPets: [],
+      // adoptedPets: [],
       filters: {
         type: 'all'
       }
@@ -43,7 +43,7 @@ class App extends React.Component {
 
   handleAdoptPet = id => {
     this.setState({
-      adoptedPets: [...this.state.adoptedPets, id]
+      adoptedPets: true
     })
   }
 
