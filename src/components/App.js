@@ -10,7 +10,7 @@ class App extends React.Component {
     this.state = {
       pets: [],
      isAdopted: false,
-     adoptedPets: [],
+     onAdoptedPets: [],
       filters: {
         type: 'all'
       }
@@ -92,7 +92,7 @@ this.setState({pets: newArr})
             <Filters filters={this.state.filters.type} onChangeType={this.handleFilter} onFindPetsClick={this.fetchPets}/>
             </div>
             <div className="twelve wide column">
-            <PetBrowser pets={this.state.pets} adoptedPets={this.state.adoptedPets} onAdoptPet={this.handleAdoption}/>
+            <PetBrowser pets={this.state.pets} onAdoptPet={this.handleAdoption}/>
             </div>
           </div>
         </div>
