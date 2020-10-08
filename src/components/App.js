@@ -12,7 +12,6 @@ class App extends React.Component {
       filters: {
         type: "all",
       },
-      initialPageLoad: true,
     };
   }
 
@@ -63,17 +62,11 @@ class App extends React.Component {
       );
   };
 
-  onInitialPageLoad = () => {
-    if (!!this.state.initialPageLoad) {
-      this.setState({
-        initialPageLoad: false,
-      });
-      this.fetchPets();
-    }
-  };
+  componentDidMount() {
+    this.fetchPets();
+  }
 
   render() {
-    // this.onInitialPageLoad();
     return (
       <div className="ui container">
         <header>
