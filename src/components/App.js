@@ -29,10 +29,12 @@ class App extends React.Component {
     }
     }
 
-    onAdoptPet = (id) => {
-      const pet = this.state.pets.find(pet => pet.id === id);
-      pet.isAdopted = true;
-    }
+    onAdoptPet = petId => {
+      const pets = this.state.pets.map(p => {
+        return p.id === petId ? { ...p, isAdopted: true } : p;
+      });
+      this.setState({ pets: pets });
+    };
 
   render() {
     return (
