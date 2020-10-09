@@ -16,7 +16,7 @@ class App extends React.Component {
   }
 
   getPets = () => {
-    let baseUrl = '/api/pets'
+    let baseUrl = 'api/pets'
 
     if (this.state.filters.type !== 'all') {
       baseUrl += `?type=${this.state.filters.type}`
@@ -24,8 +24,8 @@ class App extends React.Component {
 
     fetch(baseUrl)
     .then(response => response.json())
+    console.log(pets);
     .then(pets => this.setState({pets: pets}))
-    console.log(baseUrl);
   }
 
   onChangeType = ({target: {value}}) => {

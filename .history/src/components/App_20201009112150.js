@@ -16,7 +16,7 @@ class App extends React.Component {
   }
 
   getPets = () => {
-    let baseUrl = '/api/pets'
+    let baseUrl = 'api/pets'
 
     if (this.state.filters.type !== 'all') {
       baseUrl += `?type=${this.state.filters.type}`

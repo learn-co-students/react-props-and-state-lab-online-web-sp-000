@@ -1,6 +1,15 @@
 import React from 'react'
 
 class Filters extends React.Component {
+  // super(props)
+  onFindPetsClick = (e) => {
+    e.preventDefault()
+
+    this.props.onChangeType(e)
+    console.log('Filters -> onFindPetsClick -> e.value', e.target);
+    console.log('Filters -> onFindPetsClick -> onFindPetsClick has been clicked!');
+    // console.log(`onFindPetsClick has been clicked`);
+  }
   render() {  
     return (
       <div className="ui form">
@@ -16,7 +25,7 @@ class Filters extends React.Component {
 
         <div className="field">
           <button 
-              onClick={this.props.onFindPetsClick} 
+              onClick={this.onFindPetsClick} 
               className="ui secondary button">Find pets
           </button>
         </div>

@@ -1,12 +1,21 @@
 import React from 'react'
 
 class Filters extends React.Component {
+  // super(props)
+  onFindPetsClick = (e) => {
+    e.preventDefault()
+
+    this.props.onChangeType(e)
+    console.log('Filters -> onFindPetsClick -> e.value', e.target);
+    console.log('Filters -> onFindPetsClick -> onFindPetsClick has been clicked!');
+    // console.log(`onFindPetsClick has been clicked`);
+  }
   render() {  
     return (
       <div className="ui form">
         <h3>Animal type</h3>
         <div className="field">
-          <select name="type" id="type" onChange={this.props.onChangeType}>
+          <select name="type" id="type">
             <option value="all">All</option>
             <option value="cat">Cats</option>
             <option value="dog">Dogs</option>
@@ -16,7 +25,7 @@ class Filters extends React.Component {
 
         <div className="field">
           <button 
-              onClick={this.props.onFindPetsClick} 
+              onClick={this.onFindPetsClick} 
               className="ui secondary button">Find pets
           </button>
         </div>
