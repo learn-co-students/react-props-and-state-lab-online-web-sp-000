@@ -13,6 +13,97 @@ class App extends React.Component {
         type: 'all'
       }
     }
+
+    this.fetchPets = this.fetchPets.bind(this)
+  }
+
+  updateFilters = (event) => {
+    event.persist()
+    this.setState(previousState => {
+      return {
+        ...previousState,
+        filters: {
+          type: event.target.value
+        }
+      }
+    })
+
+    
+  }
+
+  fetchPets = (event) => {
+    //debugger
+    if (this.state.filters.type === "all") {
+      fetch("/api/pets").then(resp => resp.json()).then(data => {
+        //console.log(data)
+        this.setState(previousState => {
+          return {
+            ...previousState,
+            pets: data
+          }
+        })
+        //console.log(data);
+      })
+    } else if (this.state.filters.type === "cat") {
+      fetch('/api/pets?type=cat').then(resp => resp.json()).then(data => {
+        //console.log(data)
+        this.setState(previousState => {
+          return {
+            ...previousState,
+            pets: data
+          }
+        })
+        debugger
+      })
+    } else if (this.state.filters.type === "dog") {
+      fetch('/api/pets?type=dog').then(resp => resp.json()).then(data => {
+        //console.log(data)
+        this.setState(previousState => {
+          return {
+            ...previousState,
+            pets: data
+          }
+        })
+        debugger
+      })
+    } else if (this.state.filters.type === "micropig") {
+      fetch('/api/pets?type=micropig').then(resp => resp.json()).then(data => {
+        //console.log(data)
+        this.setState(previousState => {
+          return {
+            ...previousState,
+            pets: data
+          }
+        })
+        debugger
+      })
+    }
+    
+  }
+
+  onAdoptPet = (pet_id) => {
+    let petList = this.state.pets
+
+    let petFind = petList.find(function (pet) {
+      return pet.id === pet_id
+    })
+
+    petFind.isAdopted = true
+
+    petList = petList.filter(function (pet) {
+      return pet.id !== pet_id
+    })
+
+    petList.push(petFind)
+
+    this.setState(previousState => {
+      return {
+        pets: petList
+      }
+    })
+    
+    //console.log(petList);
+
   }
 
   render() {
@@ -24,10 +115,10 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters onChangeType={event => this.updateFilters(event)} onFindPetsClick={event => this.fetchPets(event)}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser pets={this.state.pets} onAdoptPet={this.onAdoptPet} />
             </div>
           </div>
         </div>
