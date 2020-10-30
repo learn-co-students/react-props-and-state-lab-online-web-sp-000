@@ -32,9 +32,9 @@ class Pet extends React.Component {
       }
     })
 
-    event.persist()
-    debugger
-    this.props.onAdoptPet(this.state.id, event)
+    //event.persist()
+    //debugger
+    this.props.onAdoptPet(this.state.id)
   }
 
   genAdoptButton = () => {

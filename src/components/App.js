@@ -81,7 +81,7 @@ class App extends React.Component {
     
   }
 
-  adoptPet = (pet_id) => {
+  onAdoptPet = (pet_id) => {
     let petList = this.state.pets
 
     let petFind = petList.find(function (pet) {
@@ -102,7 +102,7 @@ class App extends React.Component {
       }
     })
     
-    console.log(petList);
+    //console.log(petList);
 
   }
 
@@ -118,7 +118,7 @@ class App extends React.Component {
               <Filters onChangeType={event => this.updateFilters(event)} onFindPetsClick={event => this.fetchPets(event)}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser pets={this.state.pets} onAdoptPet={pet_id => this.adoptPet(pet_id)} />
+              <PetBrowser pets={this.state.pets} onAdoptPet={this.onAdoptPet} />
             </div>
           </div>
         </div>

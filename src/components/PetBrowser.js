@@ -25,7 +25,7 @@ class PetBrowser extends React.Component {
     
      return (
        this.props.pets.map(pet => {
-        return <Pet  pet={pet} onAdoptPet={pet.id}/>
+        return <Pet  pet={pet} onAdoptPet={this.props.onAdoptPet}/>
        })
      )
   }
