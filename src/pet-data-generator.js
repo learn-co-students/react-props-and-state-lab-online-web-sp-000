@@ -98,4 +98,4 @@ for ( let i = 0; i < AMOUNT_OF_PETS; i++ ) {
   result.push( pet );
 }
 
-console.log( JSON.stringify( result, null, 2 ) );
+//console.log( JSON.stringify( result, null, 2 ) );
