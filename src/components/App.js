@@ -2,6 +2,7 @@ import React from 'react'
 
 import Filters from './Filters'
 import PetBrowser from './PetBrowser'
+import Dummy from './Dummy'
 
 class App extends React.Component {
   constructor() {
@@ -15,7 +16,32 @@ class App extends React.Component {
     }
   }
 
+  onChangeType = (event) => {
+    this.setState({
+      filters: {
+        ...this.state.filters,
+        type: event.target.value
+      }
+    })
+  }
+
+  onFindPetClick = () => {
+    let type = this.state.filters.type
+    let pets;
+    let url;
+    if (type === 'all') {
+      url = '/api/pets'
+    }else {
+      url = `/api/pets?type=${type}`
+    }
+    return fetch(url)
+    .then(response => response.json())
+    .then(json => json);
+    return pets;
+  }
+
   render() {
+    console.log(this.onFindPetClick())
     return (
       <div className="ui container">
         <header>
@@ -24,7 +50,7 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters changeType={this.onChangeType} findPetsClick={this.onFindPetClick} />
             </div>
             <div className="twelve wide column">
               <PetBrowser />
