@@ -7,7 +7,8 @@ class Pet extends React.Component {
     this.state = {id: props.pet.id}
   }
 
-  onAdoptPet = (event) => {
+  adopt = () => {
+    // console.log(this.props)
     this.props.onAdoptPet(this.state.id)
   }
 
@@ -33,7 +34,7 @@ class Pet extends React.Component {
           </div>
         </div>
         <div className="extra content">
-          {this.props.pet.isAdopted ? <button className="ui disabled button">Already adopted</button> : <button className="ui primary button" onClick={this.onAdoptPet}>Adopt pet</button> }
+          {this.props.pet.isAdopted ? <button className="ui disabled button">Already adopted</button> : <button className="ui primary button" onClick={this.adopt}>Adopt pet</button> }
         </div>
       </div>
     )
