@@ -29,9 +29,8 @@ class App extends React.Component {
   }
 
   fetchPets = (e) => {
-    debugger
     if (this.state.filters.type === "all") {
-      fetch("api/pets").then(resp => resp.json()).then(data => {
+      fetch("/api/pets").then(resp => resp.json()).then(data => {
         this.setState(previousState => {
           return {
             ...previousState,
@@ -40,7 +39,7 @@ class App extends React.Component {
         })
       })
     } else if (this.state.filters.type === "cat") {
-      fetch("api//api/pets?type=cat").then(resp => resp.json()).then(data => {
+      fetch('/api/pets?type=cat').then(resp => resp.json()).then(data => {
         this.setState(previousState => {
           return {
             ...previousState,
@@ -49,7 +48,7 @@ class App extends React.Component {
         })
       })
     } else if (this.state.filters.type === "dog") {
-      fetch("api//api/pets?type=dog").then(resp => resp.json()).then(data => {
+      fetch('/api/pets?type=dog').then(resp => resp.json()).then(data => {
         this.setState(previousState => {
           return {
             ...previousState,
@@ -58,7 +57,7 @@ class App extends React.Component {
         })
       })
     } else if (this.state.filters.type === "micropig") {
-      fetch("api//api/pets?type=micropig").then(resp => resp.json()).then(data => {
+      fetch('/api/pets?type=micropig').then(resp => resp.json()).then(data => {
         this.setState(previousState => {
           return {
             ...previousState,
