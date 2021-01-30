@@ -15,6 +15,40 @@ class App extends React.Component {
     }
   }
 
+
+//  APP'S CALLBACK PROPS DEFINED HERE
+
+  onChangeType = ({ target: { value } }) => {
+    this.setState({ 
+      filters: {
+        ...this.state.filters, type: value
+      }
+      // "The target property of the Event interface is a reference to the object onto which the event was dispatched." (MDN docs)
+      // here, target refers to the value of the filter that the user selects
+    });
+  }
+
+  fetchPets = () => {
+    let url = '/api/pets';
+
+    if (this.state.filters.type !== 'all') {
+      url += `?type=${this.state.filters.type}`;
+    }
+
+    fetch(url)
+    .then(res=> res.json())
+    .then(pets => this.setState({ pets: pets }));
+  };
+
+  onAdoptPet = (petId) => {
+    const pets = this.state.pets.map(pet => {
+      return pet.id === petId ? {...pet, isAdopted: true} : pet;
+    });
+    this.setState({ pets: pets });
+  };
+
+  // END CALLBACK PROPS
+
   render() {
     return (
       <div className="ui container">
@@ -24,10 +58,11 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters onChangeType={this.onChangeType} 
+              onFindPetsClick={this.fetchPets} />
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser pets={this.state.pets} onAdoptPet={this.onAdoptPet} />
             </div>
           </div>
         </div>
