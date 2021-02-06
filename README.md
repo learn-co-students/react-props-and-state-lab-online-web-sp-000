@@ -27,7 +27,7 @@ Call `npm i && npm start` to run this project in your browser
 - A user should be able to change the Animal Type filter/drop down to specify
   the type of animal they want to adopt.
 - A user should be able to click on the 'Find pets' button, and they will see
-  all of pets _only_ for the type they specified in the drop down (you'll be
+  all of pets _only_ for the type they specified in the drop down (you'll be 
   fetching to a mock API to get this data).
 - A user can click on 'Adopt' to adopt that pet. They cannot un-adopt it. No
   backsies!
