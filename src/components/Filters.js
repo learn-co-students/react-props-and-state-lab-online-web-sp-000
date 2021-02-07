@@ -1,6 +1,11 @@
 import React from 'react'
 
 class Filters extends React.Component {
+
+onFindPetsClick = () => {
+  
+}
+
   render() {
     return (
       <div className="ui form">
