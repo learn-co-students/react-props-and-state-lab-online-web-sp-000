@@ -15,6 +15,26 @@ class App extends React.Component {
     }
   }
 
+  onChangeType = event => {
+    const selectedType = event.target.options[event.target.selectedIndex].value
+    this.setState({ filters: {...this.state.filters, type: selectedType}})
+    // this.setState((previousState) => ({
+    //   ...previousState,
+    //   [previousState.filters.type]: selectedType
+    // }));
+  } 
+
+  onFindPetsClick = event => {
+    const petsUrl = 'http://localhost:3000/api/pets'
+    // fetch(petsUrl, {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "Accept": "application/json"
+    //   }
+    // })
+  }
+
   render() {
     return (
       <div className="ui container">
@@ -24,7 +44,8 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters onChangeType={this.onChangeType} 
+                       onFindPetsClick={this.onFindPetsClick} />
             </div>
             <div className="twelve wide column">
               <PetBrowser />
