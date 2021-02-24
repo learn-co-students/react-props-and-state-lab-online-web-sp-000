@@ -24,15 +24,28 @@ class App extends React.Component {
     // }));
   } 
 
+  setPetsUrl = () => {
+    if (this.state.filters.type === 'all') {
+      return '/api/pets'
+    } else {
+      return `/api/pets?type=${this.state.filters.type}`
+    }
+  }
+
+  fetchPets = (petsUrl) => {
+    fetch(petsUrl)
+    .then(response => response.json())
+    .then(petsData => {
+      this.setState({
+        pets: petsData
+      })
+    })
+  }
+
   onFindPetsClick = event => {
-    const petsUrl = 'http://localhost:3000/api/pets'
-    // fetch(petsUrl, {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Accept": "application/json"
-    //   }
-    // })
+    const petsUrl = this.setPetsUrl()
+
+    this.fetchPets(petsUrl)
   }
 
   render() {
@@ -48,7 +61,7 @@ class App extends React.Component {
                        onFindPetsClick={this.onFindPetsClick} />
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser onAdoptPet={} />
             </div>
           </div>
         </div>

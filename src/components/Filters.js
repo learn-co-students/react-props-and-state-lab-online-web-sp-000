@@ -5,6 +5,8 @@ class Filters extends React.Component {
     super(props);
   }
 
+  
+
   render() {
     return (
       <div className="ui form">
