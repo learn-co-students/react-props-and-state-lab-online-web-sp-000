@@ -32,7 +32,8 @@ class App extends React.Component {
     })
   }
   
-  handleFetch = event =>{
+  handleFetch = () =>{
+
     if (this.state.filters.type === 'all'){
       fetch('/api/pets')
         .then(resp => resp.json())
