@@ -15,7 +15,7 @@ class App extends React.Component {
     }
   }
 
-  onChangeType = event => {
+  handleOnChangeType = event => {
     const selectedType = event.target.options[event.target.selectedIndex].value
     this.setState({ filters: {...this.state.filters, type: selectedType}})
     // this.setState((previousState) => ({
@@ -42,10 +42,13 @@ class App extends React.Component {
     })
   }
 
-  onFindPetsClick = event => {
+  handleOnFindPetsClick = event => {
     const petsUrl = this.setPetsUrl()
 
     this.fetchPets(petsUrl)
+  }
+
+  handleOnAdoptPet = event => {
   }
 
   render() {
@@ -57,11 +60,11 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters onChangeType={this.onChangeType} 
-                       onFindPetsClick={this.onFindPetsClick} />
+              <Filters onChangeType={this.handleOnChangeType} 
+                       onFindPetsClick={this.handleOnFindPetsClick} />
             </div>
             <div className="twelve wide column">
-              <PetBrowser onAdoptPet={} />
+              <PetBrowser pets={this.state.pets} onAdoptPet={this.handleOnAdoptPet} />
             </div>
           </div>
         </div>
