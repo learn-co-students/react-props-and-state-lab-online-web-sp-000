@@ -8,7 +8,7 @@ class Pet extends React.Component {
           <a className="header">
             {/*'♀' OR '♂' */}
             {/* PET NAME */}
-            {this.props.name}
+            {this.props.pet.name}
           </a>
           <div className="meta">
             <span className="date">PET TYPE</span>
@@ -20,7 +20,7 @@ class Pet extends React.Component {
         </div>
         <div className="extra content">
            {console.log(this.isAdopted)}
-           {this.props.isAdopted ? 
+           {this.props.pet.isAdopted ? 
                <button className="ui disabled button">Already adopted</button> 
                : 
                <button className="ui primary button">Adopt pet</button>

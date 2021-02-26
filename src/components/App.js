@@ -49,6 +49,9 @@ class App extends React.Component {
   }
 
   handleOnAdoptPet = event => {
+     const pet = this.state.pets.find(pet => pet.id === event)
+
+     return pet.isAdopted
   }
 
   render() {
