@@ -16,12 +16,9 @@ class App extends React.Component {
   }
 
   handleOnChangeType = event => {
+    event.preventDefault()
     const selectedType = event.target.options[event.target.selectedIndex].value
     this.setState({ filters: {...this.state.filters, type: selectedType}})
-    // this.setState((previousState) => ({
-    //   ...previousState,
-    //   [previousState.filters.type]: selectedType
-    // }));
   } 
 
   setPetsUrl = () => {
@@ -34,24 +31,23 @@ class App extends React.Component {
 
   fetchPets = (petsUrl) => {
     fetch(petsUrl)
-    .then(response => response.json())
-    .then(petsData => {
-      this.setState({
-        pets: petsData
+      .then(response => response.json())
+      .then(petsData => {
+         this.setState({
+            pets: petsData
+         })
       })
-    })
   }
 
-  handleOnFindPetsClick = event => {
+  handleOnFindPetsClick = () => {
     const petsUrl = this.setPetsUrl()
 
     this.fetchPets(petsUrl)
   }
 
-  handleOnAdoptPet = event => {
-     const pet = this.state.pets.find(pet => pet.id === event)
-
-     return pet.isAdopted
+  handleOnAdoptPet = petId => {
+     const pet = this.state.pets.find(pet => pet.id === petId)
+     pet.isAdopted = true
   }
 
   render() {
