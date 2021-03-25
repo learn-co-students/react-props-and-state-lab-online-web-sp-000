@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "fetch-mock": "^5.9.4",
+    "fetch-mock": "^9.11.0",
     "jsdom": "^9.9.1",
-    "mocha": "^3.2.0",
-    "react-scripts": "^3.3.0",
+    "mocha": "^8.3.2",
+    "react-scripts": "^4.0.3",
     "react-test-renderer": "^16.0.0",
     "webpack": "^4.41.2",
     "webpack-dev-server": "^3.9.0"
@@ -22,7 +22,7 @@
     "chai": "^3.5.0",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",
-    "expect": "^21.2.1",
+    "expect": "^26.6.2",
     "react": "^16.0.0",
     "react-dom": "^16.3.3",
     "sinon": "^1.17.7",
