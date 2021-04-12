@@ -27,13 +27,11 @@ class App extends React.Component {
 
   // gets id from event target button, matches id with pets array passed from props
   onAdoptPet = (petId) => {
-    let pet = this.state.pets.find(pet => pet.id === petId)
-    pet.isAdopted = true
-    this.setState({
-      pets: this.state.pets
-    })
-    console.log(pet)
-  }
+      const pets = this.state.pets.map(p => {
+        return p.id === petId ? { ...p, isAdopted: true } : p;
+      });
+      this.setState({ pets: pets });
+    };
 
   // find pets using fetch & update array in state to pass as prop to pet
   findPets = () => {
