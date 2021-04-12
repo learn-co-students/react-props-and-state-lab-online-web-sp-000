@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 
 class Pet extends React.Component {
   render() {
     return (
-       <div className="card">
+      <div className="card">
         <div className="content">
           <a className="header">
-            {this.props.pet.gender === "female" ? '♀' : '♂'}
-            {this.props.pet.name}
+            {this.props.pet.name}{' '}
+            {this.props.pet.gender === 'female' ? '♀' : '♂'}
           </a>
           <div className="meta">
             <span className="date">{this.props.pet.type}</span>
@@ -19,19 +19,18 @@ class Pet extends React.Component {
         </div>
         <div className="extra content">
           {this.props.pet.isAdopted ? (
-          <button className="ui disabled button">Already adopted</button>
-           ) : ( 
-           <button 
-                onClick={() => this.props.onAdoptPet(this.props.pet.id)}
-                className="ui primary button">
-                 
-                Adopt pet
-              </button>
-           )}
+            <button className="ui disabled button">Already adopted</button>
+          ) : (
+            <button
+              onClick={() => this.props.onAdoptPet(this.props.pet.id)}
+              className="ui primary button">
+              Adopt pet
+            </button>
+          )}
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Pet
+export default Pet;
