@@ -1,5 +1,6 @@
 {
   "name": "react-props-and-state-lab",
+  "homepage": "http://localhost:3000/",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -23,6 +24,7 @@
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",
     "expect": "^21.2.1",
+    "mocha-multi": "^1.1.3",
     "react": "^16.0.0",
     "react-dom": "^16.3.3",
     "sinon": "^1.17.7",
