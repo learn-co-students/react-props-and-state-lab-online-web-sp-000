@@ -16,6 +16,7 @@ class App extends React.Component {
   }
 
   handleTypeChange = event => {
+    event.persist()
     this.setState(previousState => {
       return {
         filters: Object.assign({}, previousState.filters, {
@@ -34,7 +35,9 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters onChangeType={this.handleTypeChange} />
+              <Filters
+                onChangeType={this.handleTypeChange}
+              />
             </div>
             <div className="twelve wide column">
               <PetBrowser />
