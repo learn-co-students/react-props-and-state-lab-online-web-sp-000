@@ -3,11 +3,11 @@ import React from 'react'
 class Filters extends React.Component {
 
   handleSelection = (event) => {
-    this.props.onChangeType(event.target.value)
+    return this.props.onChangeType(event.target.value)
   }
 
   handleButton = () => {
-    this.props.onFindPetsClick()
+    return this.props.onFindPetsClick()
   }
 
   render() {
@@ -15,7 +15,7 @@ class Filters extends React.Component {
       <div className="ui form">
         <h3>Animal type</h3>
         <div className="field">
-          <select name="type" id="type" onSelect= {event => this.handleSelection(event)}>
+          <select name="type" id="type" onChange= {event => this.handleSelection(event)}>
             <option value="all">All</option>
             <option value="cat">Cats</option>
             <option value="dog">Dogs</option>

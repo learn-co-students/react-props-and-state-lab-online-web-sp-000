@@ -8,7 +8,7 @@ class PetBrowser extends React.Component {
     if (this.props.pets && this.props.pets.map){
       allPets = this.props.pets.map(selPet => {
         return(
-          <Pet pet={selPet}/>
+          <Pet pet={selPet} onAdoptPet={this.props.onAdoptPet}/>
       )})
     }
     return(

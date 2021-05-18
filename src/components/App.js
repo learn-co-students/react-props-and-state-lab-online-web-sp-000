@@ -22,24 +22,31 @@ class App extends React.Component {
 
   findFilteredPets = () => {
     let filter = ''
-    if (this.state.filters.type = "all"){
+    console.log(this.state.filters.type)
+    if (this.state.filters.type == "all"){
       filter = ""
     }
-    else
+    else{
       filter = `?type=${this.state.filters.type}`
+    }
     console.log(`/api/pets${filter}`)
-    this.setState({
-        pets: fetch(`/api/pets${filter}`)
-    })
+    fetch(`/api/pets${filter}`).then(resp => resp.json()).then(json => this.setState({
+      pets: json
+    }))
   }
 
   adoptDatBoi = (petID) => {
+    console.log("handling in app component")
     let newPets = this.state.pets.map(pet => {
-      if (pet.id == petID)
+      if (pet.id == petID){
         return {...pet, isAdopted: true}
-      else
+      }
+      else{
         return pet
+      }
     })
+    console.log(newPets)
+    console.log(this.state.pets)
     this.setState({
       pets: newPets
     })
