@@ -36,7 +36,7 @@ describe('<App />', () => {
         .onFindPetsClick();
       expect(
         fetchMock.called('/api/pets'),
-        'The right API URL is not being fetched when finding pets.'
+      'The right API URL is not being fetched when finding pets.'
       ).to.be.true;
     });
 
