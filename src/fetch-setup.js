@@ -8,3 +8,4 @@ fetchMock.get('/api/pets?type=dog', getByType('dog'));
 fetchMock.get('/api/pets?type=micropig', getByType('micropig'));
 
 export default fetchMock;
+
