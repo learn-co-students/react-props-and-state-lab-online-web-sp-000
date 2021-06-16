@@ -15,6 +15,45 @@ class App extends React.Component {
     }
   }
 
+  handleFilterType = event => {
+    // debugger
+      this.setState({
+          filters: {
+            ...this.state.filters,
+            type: event.target.value
+          }
+
+      })
+  }
+
+  handleFindPets = () => {
+
+    let endpoint = '/api/pets';
+
+    if (this.state.filters.type !== 'all') {
+      endpoint += `?type=${this.state.filters.type}`;
+    }
+
+    // Don't understant what's happening in the above conditional at all
+
+    fetch(endpoint)
+      .then(res => res.json())
+      .then(pets => this.setState({
+
+        pets: pets
+      }));
+
+  };
+
+  handleAdoptPet = petId => {
+    const pets = this.state.pets.map(p => {
+      return p.id === petId ? { ...p, isAdopted: true } : p;
+    });
+    this.setState({ pets: pets });
+  };
+
+
+
   render() {
     return (
       <div className="ui container">
@@ -24,10 +63,11 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters onChangeType={this.handleFilterType}
+                       onFindPetsClick={this.handleFindPets}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser pets={this.state.pets} onAdoptPet={this.handleAdoptPet}/>
             </div>
           </div>
         </div>
